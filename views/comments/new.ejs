@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container">
+    
+    <!-- bootstrap grid -->
+    <div class="row">
+        <h1 style="text-align: center;">Add New Comment to <%= campground.name %></h1>
+        <!--div created for inline styling for form (temporary)-->
+        <div style="width: 30%; margin: 30px auto">
+            <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+                <!-- contain text and author inside Comment object-->
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment[text]" placeholder="text">
+                </div>
+                <!--no longer need input for author-->
+                <!--<div class="form-group">-->
+                <!--    <input class="form-control" type="text" name="comment[author]" placeholder="author">-->
+                <!--</div>-->
+                <div class="form-group">
+                    <button class="btn btn-large btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+        <a href="/campgrounds">Go Back</a>
+        </div>
+    </div>
+    
+</div>
+
+<% include ../partials/footer %>

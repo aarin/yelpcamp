@@ -1,0 +1,104 @@
+<% include ../partials/header %>
+
+<div class="container">
+    
+    <!--bootstrap grid-->
+    <div class="row">
+        <!--left section with width of 3 columns of bootstrap 12-->
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+        
+        <!--main section with width of 9 columns of bootstrap 12-->
+        <div class="col-md-9">
+            
+            <!--creates thumbnail of image and caption-->
+            <div class="thumbnail">
+                
+                <!--use bootstrap's class "responsive"-->
+                <img class="responsive" src="<%= campground.image %>">
+                
+                <!--caption-full class for displaying price, name, description-->
+                <div class="caption-full">
+                    
+                    <!--bootstrap pull-right class moves it to the right of campground name-->
+                    <h4 class="pull-right">$9.00/night</h4>
+                    <h4><a><%= campground.name %></a></h4>
+                    <p><%= campground.description %></p>
+                    <p><em>Submitted By <%= campground.author.username %></em> </p>
+                    
+                    <!-- Check if authorized to view EDIT and DELETE buttons-->
+                    <!-- use Mongoose method .equals() to compare ids. currentUser._id-->
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                    
+                        <!--Edit Campground Button-->
+                        <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                        
+                        <!--you need a form to delete a campground-->
+                        <!-- and use override syntax for DELETE in form's action -->
+                        <form id="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                        
+                    <% } %>
+                </div>
+            </div>
+            
+            <!-- .well class (rounded border with gray bg and padding) with the same width as thumbnail-->
+            <div class="well">
+                
+                <!--button on the right on its own line-->
+                <div class="text-right">
+                    <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+                </div>
+                
+                <hr>
+                
+                <!-- loop through all the comments on a given campground and make a paragraph on the show page -->
+                <% campground.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <strong><%= comment.author.username %></strong>
+                            <span class="pull-right">10 days ago</span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                            
+                            <!-- Check if authorized to view EDIT and DELETE buttons-->
+                            <!-- use Mongoose method .equals() to compare ids. currentUser._id-->
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            
+                                <!-- edit and delete comment buttons -->
+                                <a class="btn btn-xs btn-warning" 
+                                    href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
+                                    Edit
+                                </a>
+                                 <!-- use method override for DELETE in form's action -->
+                                <form id="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                    <button class="bt btn-xs btn-danger">Delete</button>
+                                </form>
+                            <% } %>
+                            
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<% include ../partials/footer %>
