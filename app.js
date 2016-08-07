@@ -31,12 +31,15 @@ var commentRoutes    = require("./routes/comments"),
     
 
 /********** App Config **********/
+console.log(process.env.DATABASEURL);
 
+// connect to database url for either development or deployment(mongolab)
+mongoose.connect(process.env.DATABASEURL);
 
-// deployment: connection to mongolab database
-mongoose.connect("mongodb://aarin:baxter1001@ds145315.mlab.com:45315/yelp-camp-development");      // connect to mongolab database
+// deployment code: connection to mongolab database
+// mongoose.connect("mongodb://aarin:baxter1001@ds145315.mlab.com:45315/yelp-camp-development");      // connect to mongolab database
 
-// development: connection to mongo database
+// development & test code: connection to mongo database
 //mongoose.connect("mongodb://localhost/yelp_camp");
 
 app.use(bodyParser.urlencoded({extended: true}));       // use bodyParser to extract from forms
@@ -45,7 +48,7 @@ app.use(express.static(__dirname + "/public"));         // serve contents of /pu
 app.use(methodOverride("_method"));                     // creates middleware to override a method
 app.use(flash());                                       // uses flash package to display flash messages
 
-// seedDB();                                            // call function to seed the database
+// seedDB();                                             // call function to seed the database
 
 
 /********** Passport Config **********/
@@ -85,7 +88,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 
 
 /******************* IMPORTANT! ********************/
-// listen for the port and host needed to run on cloud9
+// listen for the port and host of environment on cloud9
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The server has started.");
 });
