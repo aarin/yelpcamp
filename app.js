@@ -32,7 +32,13 @@ var commentRoutes    = require("./routes/comments"),
 
 /********** App Config **********/
 
-mongoose.connect("mongodb://localhost/yelp_camp");      // connect to mongo database
+
+// deployment: connection to mongolab database
+mongoose.connect("mongodb://aarin:baxter1001@ds145315.mlab.com:45315/yelp-camp-development");      // connect to mongolab database
+
+// development: connection to mongo database
+//mongoose.connect("mongodb://localhost/yelp_camp");
+
 app.use(bodyParser.urlencoded({extended: true}));       // use bodyParser to extract from forms
 app.set("view engine", "ejs");                          // set view engine
 app.use(express.static(__dirname + "/public"));         // serve contents of /public directory (stylesheets, scripts)
