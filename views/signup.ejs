@@ -1,12 +1,28 @@
 <% include ./partials/header %>
 
+<div class="container">
+    <div class="well text-center">
+        <h1>Sign Up!</h1>
 
-<h1>Sign Up!</h1>
+        <form action="/signup" method="POST">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <input class="form-control" type="text" name="username" placeholder="username">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <input class="form-control" type="password" name="password" placeholder="password">
+                </div>
+            </div>
+            <br>
+            <button>Submit</button>
+        </form>
+        
+    </div>
+</div>
 
-<form action="/signup" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <button>Sign Up!</button>
-</form>
+
 
 <% include ./partials/footer %>

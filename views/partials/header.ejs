@@ -4,7 +4,9 @@
         <title>YelpCamp</title>
         
         <!--links to stylesheets-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/stylesheets/main.css"></link>
     </head>
     <body>
@@ -22,11 +24,11 @@
                         
                         <!-- check if there's a currentUser (from app.js routes) -->
                         <% if(!currentUser){ %>
-                            <li><a href="/login">Login</a></li>
-                            <li><a href="/signup">Sign Up</a></li>
+                            <li><a href="/login">Login <i class="fa fa-user"></i></a></li>
+                            <li><a href="/signup">Sign Up <i class="fa fa-user-plus"></i></a></li>
                         <% } else { %>
                             <li><a href="#">Signed in as <%= currentUser.username %></a></li>
-                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/logout">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                         <% } %>
                     </ul>
                 </div>

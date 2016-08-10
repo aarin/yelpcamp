@@ -31,16 +31,11 @@ var commentRoutes    = require("./routes/comments"),
     
 
 /********** App Config **********/
-console.log(process.env.DATABASEURL);
 
-// connect to database url for either development or deployment(mongolab)
-mongoose.connect(process.env.DATABASEURL);
-
-// deployment code: connection to mongolab database
-// mongoose.connect("mongodb://aarin:baxter1001@ds145315.mlab.com:45315/yelp-camp-development");      // connect to mongolab database
-
-// development & test code: connection to mongo database
-//mongoose.connect("mongodb://localhost/yelp_camp");
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";   // good practice to catch if env variable is undefine or empty
+mongoose.connect(url);                                                  // mongoose connect to database url or default to localhost database
+// Mongo Lab Database URL (for heroku & deployment):                    mongodb://aarin:baxter1001@ds145315.mlab.com:45315/yelp-camp-development"
+// Local Host Database URL (for mongod & development):                  mongodb://localhost/yelp_camp
 
 app.use(bodyParser.urlencoded({extended: true}));       // use bodyParser to extract from forms
 app.set("view engine", "ejs");                          // set view engine
